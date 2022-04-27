@@ -1,0 +1,30 @@
+[
+  {
+    "name": "add-product",
+    "path": "/add-product",
+    "component": "/app/project-management/pages/add-product.vue",
+    "chunkName": "pages/add-product",
+    "_name": "_99250cc2"
+  },
+  {
+    "name": "contents",
+    "path": "/contents",
+    "component": "/app/project-management/pages/contents.vue",
+    "chunkName": "pages/contents",
+    "_name": "_27c8de6e"
+  },
+  {
+    "name": "products",
+    "path": "/products",
+    "component": "/app/project-management/pages/products.vue",
+    "chunkName": "pages/products",
+    "_name": "_32ad1fb8"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/app/project-management/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_19a46e2e"
+  }
+]

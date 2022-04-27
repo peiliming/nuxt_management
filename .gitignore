@@ -1,0 +1,5 @@
+.DS_Store
+.env
+client/project-management/node_modules
+app/node_modules
+

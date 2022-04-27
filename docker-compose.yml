@@ -1,0 +1,58 @@
+version: "3"
+services:
+  app:
+    build: ./docker/app/
+    ports:
+      - "8888:3000"
+    volumes:
+      - ./app:/app
+    command: bash
+    # command: bash -c "npm i && npm start"
+    tty: true
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "5"
+  client:
+    build: ./docker/client/
+    ports:
+      - "4500:3000"
+    volumes:
+      - ./client:/app
+    command: bash
+    # command: bash -c "npm i && scripts/start.sh"
+    tty: true
+  mysql:
+      image: mysql:latest
+      platform: linux/amd64
+      ports:
+        - "3306:3306"
+      restart: always
+      env_file: .env
+      volumes:
+        - ./mysql/data:/var/lib/mysql
+        - ./mysql/conf:/etc/mysql/conf.d/my.cnf
+        - /etc/localtime:/etc/localtime:ro
+        - ./mysql/sql:/docker-entrypoint-initdb.d
+  # mysql:
+  #   build: ./docker/mysql
+  #   platform: linux/amd64
+  #   env_file: .env
+  #   ports:
+  #     - "127.0.0.1:3308:3306"
+  #   volumes:
+  #     - ./mysql/data:/var/lib/mysql
+  #     - /etc/localtime:/etc/localtime:ro
+  #     # - db:/var/lib/mysql  #MySQLデータ  
+  #     - ./mysql/conf:/etc/mysql/conf.d/my.cnf  #MySQL設定ファイル
+  #     #MySQL起動時の初期化スクリプト置き場(*.sql、*.shのファイルを使えます)
+  #     - ./mysql/sql:/docker-entrypoint-initdb.d
+  #   #ポートフォワーディング(外部のポートと繋げる設定)
+  #   #コンテナ内のMySQLはデフォルトで3306ポートで開いているので3306を指定
+  #   #volumesと同様に「ホスト側:コンテナ側」で対応させます
+  #   #コンテナ起動時に実行するコマンド
+  #   #コンテナ内でmysqlデーモンを指定の文字セットで起動します
+  #   command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  #   restart: always
+# volumes:
+#   db:
